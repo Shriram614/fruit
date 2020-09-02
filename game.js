@@ -37,7 +37,7 @@ class Game{
     
     play(){
 
-        var x = 100;
+        var x = 100;                                                          
         var y;
         
                 form.hide();
@@ -58,6 +58,8 @@ class Game{
                      players[index -1].x = x;
                      players[index - 1].y = y;
                        
+                    
+
                      if(index === player.index){
                          
                          fill("black");
@@ -75,17 +77,17 @@ class Game{
                  
 
                 if (keyIsDown(RIGHT_ARROW) && player.index !== null) {
-                    player.distance -= 10
+                    player.distance -= 20
                     player.update();
                 }
                 if (keyIsDown(LEFT_ARROW) && player.index !== null) {
-                    player.distance += 10
+                    player.distance += 20
                     player.update();
                 }
-            
-                 if (frameCount % 20 === 0) {
+                
+                 if (frameCount % 60 === 0) {
                      fruits = createSprite(random(100, 1000), 0, 100, 100);
-                     fruits.velocityY = 6;
+                     fruits.velocityY = 15;
                      var rand = Math.round(random(1,5));
                      switch(rand){
                          case 1: fruits.addImage("fruit1",fruit1_img);
@@ -105,7 +107,9 @@ class Game{
                  
                   if (player.index !== null) {
                      //fill code here, to destroy the objects.
-                     fruitGroup.destroyEach();
+                     if(fruitGroup.isTouching(player1)||fruitGroup.isTouching(player2)){
+                         fruitGroup.destroyEach();
+                     }
                   }
                 
 
